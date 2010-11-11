@@ -1,0 +1,14 @@
+.ui-rating .ui-rating-star {
+    width: 16px;
+    height: 16px;
+    font-size: 2px;
+    float: left;
+    text-decoration: none;
+    vertical-align: bottom;
+    background-image: url('star.gif');
+    background-repeat: no-repeat;
+}
+.ui-rating a	 {cursor: pointer;}
+.ui-rating-full  {background-position:left top;}
+.ui-rating-empty {background-position:left -32px;}
+.ui-rating-hover {background-position:left -48px;}
