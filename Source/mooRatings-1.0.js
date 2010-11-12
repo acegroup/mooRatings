@@ -2,7 +2,7 @@
 ---
 description: MooTools star rating system. Based on ripter/jquery.rating.
 
-license: GPL
+license: MIT
 
 copright: 2010 Ace Group (bv) <http://www.acegroup.nl>
 
