@@ -36,7 +36,7 @@ var mooRatings = new Class({
 	options : {
 		showSelectBox : false,
 		container : null,
-		defaultRating : null
+		defaultRating : false
 	},
 
     selectBox : null,
@@ -134,26 +134,26 @@ var mooRatings = new Class({
     // set the current rating
     setRating : function(rating) {
         // use selected rating if none supplied
-        if (!rating) {
+        if (rating===false) {
 			rating = this.selectBox.get('value');
 			// use first rating option if none selected
-			if (!rating) {
+			if (rating===false) {
 				rating = this.selectBox.getElement('option[value!=]').get('value');
 			}
 		}
         
         // get the current selected rating star
         var current = this.container.getElement('a[title=ui-rating-value-' + rating + ']');
+		if (current){
+			// highlight current and previous stars in yellow
+			current.set('class', 'ui-rating-star ui-rating-full')
+				.getAllPrevious()
+				.set('class', 'ui-rating-star ui-rating-full');
 
-        // highlight current and previous stars in yellow
-        current.set('class', 'ui-rating-star ui-rating-full')
-            .getAllPrevious()
-            .set('class', 'ui-rating-star ui-rating-full');
-
-        // remove highlight from higher ratings
-        current.getAllNext()
-            .set('class', 'ui-rating-star ui-rating-empty');
-		
+			// remove highlight from higher ratings
+			current.getAllNext()
+				.set('class', 'ui-rating-star ui-rating-empty');
+		}
 		// synchronize the rate with the selectbox
 		this.selectBox.set('value', rating);
     }
