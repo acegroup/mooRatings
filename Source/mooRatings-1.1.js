@@ -145,14 +145,22 @@ var mooRatings = new Class({
         // get the current selected rating star
         var current = this.container.getElement('a[title=ui-rating-value-' + rating + ']');
 		if (current){
+			//if the current star is already full, empty it and the next stars
+			if (current.get('class').indexOf('ui-rating-full') > -1){
+				current.set('class', 'ui-rating-star ui-rating-empty');
+				current.getAllNext()
+				    .set('class', 'ui-rating-star ui-rating-empty');
+			}
+			else {
 			// highlight current and previous stars in yellow
-			current.set('class', 'ui-rating-star ui-rating-full')
-				.getAllPrevious()
-				.set('class', 'ui-rating-star ui-rating-full');
-
-			// remove highlight from higher ratings
-			current.getAllNext()
-				.set('class', 'ui-rating-star ui-rating-empty');
+				current.set('class', 'ui-rating-star ui-rating-full')
+					.getAllPrevious()
+					.set('class', 'ui-rating-star ui-rating-full');
+	
+				// remove highlight from higher ratings
+				current.getAllNext()
+					.set('class', 'ui-rating-star ui-rating-empty');
+			}
 		}
 		// synchronize the rate with the selectbox
 		this.selectBox.set('value', rating);
